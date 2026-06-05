@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi futura abogada favorita ❤️</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    /* Un fondo elegante en tonos morados (sabiduría) y oscuros */
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  .tarjeta {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 35px 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 90%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  h1 { 
+    font-size: 2em; 
+    margin-top: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6); 
+  }
+  p { 
+    font-size: 1.1em; 
+    line-height: 1.6; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  }
+  .iconos { 
+    font-size: 3em; 
+    margin-bottom: 10px; 
+  }
+  button {
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background-color: #9c27b0;
+    color: white;
+    margin-top: 20px;
+    transition: transform 0.2s;
+  }
+  button:active {
+    transform: scale(0.9);
+  }
+  /* Animación de las figuras que caen */
+  .particula {
+    position: fixed;
+    font-size: 24px;
+    animation: caer linear infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @keyframes caer {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="tarjeta">
+    <div class="iconos">📚 👩‍🎓 ⚖️ ❤️</div>
+    <h1>¡Feliz Día a mi Futura Abogada Favorita!</h1>
+    <p>Hoy, 5 de junio, también celebramos a quienes se preparan con el corazón para defender la justicia.</p>
+    <p>Sé lo mucho que te esfuerzas entre libros, códigos y amanecidas estudiando. Aunque aún estás en el camino, ya tienes la pasión, la inteligencia y el talento de una gran profesional.</p>
+    <p><strong>¡Estoy súper orgulloso de ti, hermanita!</strong></p>
+    
+    <button onclick="promesa()">¡Prometo ser la mejor abogada! 👩‍🎓⚖️</button>
+  </div>
+
+  <script>
+    // Mensaje de motivación al hacer clic en el botón
+    function promesa() {
+      alert("¡Yo sé que sí! Sigue esforzándote, llegarás muy lejos y serás brillante. ¡Te quiero mucho! ❤️📚✨");
+    }
+
+    // Código para las partículas
+    function crearParticula() {
+      const particula = document.createElement('div');
+      particula.classList.add('particula');
+      
+      const simbolos = ['✨', '📚', '⚖️', '👩‍🎓', '💡', '🌟', '❤️'];
+      particula.innerHTML = simbolos[Math.floor(Math.random() * simbolos.length)];
+      
+      particula.style.left = Math.random() * 100 + 'vw';
+      particula.style.animationDuration = Math.random() * 4 + 3 + 's'; 
+      document.body.appendChild(particula);
+      
+      setTimeout(() => { particula.remove(); }, 7000);
+    }
+    
+    setInterval(crearParticula, 400);
+  </script>
+
+</body>
+</html>
