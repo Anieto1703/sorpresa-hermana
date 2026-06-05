@@ -31,6 +31,7 @@
     z-index: 10;
     margin-top: 20px;
     margin-bottom: 20px;
+    position: relative; /* Necesario para contener el movimiento del botón */
   }
   h1 { 
     font-size: 2em; 
@@ -57,11 +58,40 @@
     background-color: #9c27b0;
     color: white;
     margin-top: 20px;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.3s;
   }
   button:active {
     transform: scale(0.9);
   }
+
+  /* --- Sección Hermano Favorito --- */
+  .seccion-favorito {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+  }
+
+  .botones-favorito-contenedor {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    height: 100px; /* Espacio para que el botón se mueva */
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  #btnSaory {
+    background-color: #e91e63; /* Un color diferente para contraste */
+    position: relative; /* Importante para el movimiento con JS */
+    z-index: 15;
+    transition: all 0.1s ease; /* Movimiento rápido */
+  }
+
+  #btnAngel {
+    background-color: #4caf50; /* Color verde éxito */
+  }
+
   /* Animación de las figuras que caen */
   .particula {
     position: fixed;
@@ -86,15 +116,58 @@
     <p><strong>¡Estoy súper orgulloso de ti, hermanita!</strong></p>
     
     <button onclick="promesa()">¡Prometo ser la mejor abogada! 👩‍🎓⚖️</button>
+
+    <!-- NUEVA SECCIÓN: Hermano Favorito -->
+    <div class="seccion-favorito">
+        <h2>Un pequeño test de justicia... 🤔</h2>
+        <p>¿Quién es tu hermano favorito?</p>
+        
+        <div class="botones-favorito-contenedor">
+            <button type="button" id="btnSaory">Saory</button>
+            <button type="button" id="btnAngel" onclick="seleccionarAngel()">Ángel</button>
+        </div>
+    </div>
   </div>
 
   <script>
-    // Mensaje de motivación al hacer clic en el botón
+    // Mensaje de motivación al hacer clic en el botón principal
     function promesa() {
       alert("¡Yo sé que sí! Sigue esforzándote, llegarás muy lejos y serás brillante. ¡Te quiero mucho! ❤️📚✨");
     }
 
-    // Código para las partículas
+    // --- Lógica para el botón esquivo de Saory ---
+    const btnSaory = document.getElementById('btnSaory');
+    const contenedorBotones = document.querySelector('.botones-favorito-contenedor');
+
+    function moverBotonSaory(e) {
+        // Evitamos que el evento táctil se comporte como clic
+        if (e.type === 'touchstart') e.preventDefault();
+
+        // Calculamos los límites dentro del contenedor de botones
+        // Restamos el tamaño del botón para que no se salga
+        const maxW = contenedorBotones.offsetWidth - btnSaory.offsetWidth;
+        const maxH = contenedorBotones.offsetHeight - btnSaory.offsetHeight;
+
+        // Generamos posiciones aleatorias (pueden ser negativas para movimiento caótico)
+        const randomX = Math.random() * maxW - (maxW / 2);
+        const randomY = Math.random() * maxH - (maxH / 2);
+
+        // Aplicamos el movimiento usando transformación para mejor rendimiento
+        btnSaory.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    // Eventos para desktop (pasar el mouse) y mobile (tocar)
+    btnSaory.addEventListener('mouseover', moverBotonSaory);
+    btnSaory.addEventListener('touchstart', moverBotonSaory);
+
+    // Lógica para cuando seleccione a Ángel
+    function seleccionarAngel() {
+        // Ponemos el botón de Saory en su lugar original por si quiere intentar clickearlo de nuevo
+        btnSaory.style.transform = 'translate(0px, 0px)';
+        alert("¡Sabía que la justicia siempre prevalece! 😏 ¡Yo también te quiero mucho, Johanna! ¡Felicidades! ❤️");
+    }
+
+    // --- Código para las partículas que caen ---
     function crearParticula() {
       const particula = document.createElement('div');
       particula.classList.add('particula');
